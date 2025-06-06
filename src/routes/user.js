@@ -46,7 +46,7 @@ userRouter.get("/user/connections", userAuth, async (req, res) => {
       return connection.fromUserId;
     });
 
-    return res.status(200).json({ response });
+    return res.status(200).json({ data: response });
   } catch (err) {
     res.status(400).send(err.message);
   }
@@ -79,7 +79,7 @@ userRouter.get("/feed", userAuth, async (req, res) => {
         { _id: { $ne: loggedInUser._id } },
       ],
     })
-      .select("firstName lastName photoUrl about age")
+      .select("firstName lastName photoUrl about age skills")
       .skip(skip)
       .limit(limit);
 
