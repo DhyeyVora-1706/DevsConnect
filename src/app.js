@@ -1,3 +1,5 @@
+import dotenv from "dotenv";
+dotenv.config();
 import express from "express";
 import cookieparser from "cookie-parser";
 import { connectToDB } from "./config/database.js";
@@ -103,8 +105,8 @@ app.patch("/user/:userId", async (req, res) => {
 async function startServer() {
   try {
     await connectToDB();
-    app.listen(7777, () => {
-      console.log("Server is listening at port 7777");
+    app.listen(process.env.PORT, () => {
+      console.log(`Server is listening at port ${process.env.PORT}`);
     });
   } catch (err) {
     console.error("Failed to start the server due to DB connection error.");
